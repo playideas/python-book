@@ -1,13 +1,13 @@
 # 파이썬 완전 백과사전
 
-파이썬을 처음 배우는 사람부터 딥러닝 모델을 서비스로 내보내려는 사람까지, 한국어로 차근차근 읽을 수 있게 쓴 책 시리즈입니다.
+파이썬을 처음 배우는 사람부터 딥러닝 모델을 서비스로 내보내고 로봇을 움직이려는 사람까지, 한국어로 차근차근 읽을 수 있게 쓴 책 시리즈입니다.
 본문에 실린 코드와 출력은 모두 실제로 실행해서 얻은 그대로입니다.
 
 | 권 | 내용 | 원고 | 예제 |
 |---|---|---|---|
 | 1권 | 파이썬 (20장) | [`manuscript/`](manuscript/) | [`examples/vol1/`](examples/vol1/) |
 | 2권 | PyTorch 딥러닝 (21장, 부록 A~C) | [`manuscript-vol2/`](manuscript-vol2/) | [`examples/vol2/`](examples/vol2/) |
-| 3권 | 로봇 | 집필 중 | |
+| 3권 | 로봇 (21장, 부록 A~D) | [`manuscript-vol3/`](manuscript-vol3/) | [`examples/vol3/`](examples/vol3/) |
 | 4권 | 에이전트 엔지니어링 | 계획 중 | |
 
 ## 읽기
@@ -16,10 +16,11 @@ PDF로 받아 읽을 수 있습니다.
 
 - [1권 파이썬 PDF 내려받기](https://github.com/pi-cm/python-book/releases/latest/download/python-encyclopedia-vol1-python.pdf) (1,134쪽)
 - [2권 PyTorch 딥러닝 PDF 내려받기](https://github.com/pi-cm/python-book/releases/latest/download/python-encyclopedia-vol2-pytorch.pdf) (1,120쪽)
+- [3권 로봇 PDF 내려받기](https://github.com/pi-cm/python-book/releases/latest/download/python-encyclopedia-vol3-robot.pdf) (1,166쪽)
 
 지난 판은 [Releases](https://github.com/pi-cm/python-book/releases)에 있습니다.
 
-원고는 장마다 마크다운 파일 하나입니다. 깃허브에서 `manuscript/chapters/`나 `manuscript-vol2/chapters/`를 열면 바로 읽을 수 있어요.
+원고는 장마다 마크다운 파일 하나입니다. 깃허브에서 `manuscript/chapters/`, `manuscript-vol2/chapters/`, `manuscript-vol3/chapters/`를 열면 바로 읽을 수 있어요.
 
 ## 예제 실행
 
@@ -27,6 +28,7 @@ PDF로 받아 읽을 수 있습니다.
 
 - [`examples/vol1/README.md`](examples/vol1/README.md)
 - [`examples/vol2/README.md`](examples/vol2/README.md)
+- [`examples/vol3/README.md`](examples/vol3/README.md) — 3권은 MuJoCo 시뮬레이션만으로 맥·윈도우·리눅스에서 끝까지 따라올 수 있습니다. ROS 2 장은 Docker를 씁니다
 
 [uv](https://docs.astral.sh/uv/)가 필요합니다.
 
@@ -37,16 +39,17 @@ PDF로 받아 읽을 수 있습니다.
 ```bash
 uv run python tools/build.py --pdf --vol 1   # output/에 1권 PDF
 uv run python tools/build.py --pdf --vol 2   # output/에 2권 PDF
+uv run python tools/build.py --pdf --vol 3   # output/에 3권 PDF
 ```
 
-한자와 일부 기호는 macOS 시스템 글꼴(AppleMyungjo, Thonburi, Arial Unicode MS)로 찍습니다. 다른 운영체제에서는 `tools/pdf-header.tex`의 해당 글꼴을 설치된 글꼴로 바꾸세요.
+한자와 일부 기호는 macOS 시스템 글꼴(AppleMyungjo, Thonburi, Arial Unicode MS, Times New Roman)로 찍습니다. 다른 운영체제에서는 `tools/pdf-header.tex`의 해당 글꼴을 설치된 글꼴로 바꾸세요.
 
 ## 폴더 구성
 
-- `manuscript/`, `manuscript-vol2/` — 원고(장, 부록, 그림)
+- `manuscript/`, `manuscript-vol2/`, `manuscript-vol3/` — 원고(장, 부록, 그림)
 - `examples/` — 원고에서 뽑은 실행용 예제
 - `tools/` — PDF 빌드(`build.py`), 예제 추출(`extract_examples.py`), 예제 검사(`check_examples.py`)
-- `build-src/` — 2권 원고를 만든 작업 재료. 코드 블록을 실행해 출력을 원고에 채우는 스크립트입니다([`build-src/README.md`](build-src/README.md)).
+- `build-src/` — 2·3권 원고를 만든 작업 재료. 코드 블록을 실행해 출력을 원고에 채우는 스크립트입니다([`build-src/README.md`](build-src/README.md)).
 
 ## 라이선스
 

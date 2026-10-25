@@ -5,6 +5,7 @@
 - `vol2/v2cNN/` — 2권 N장. `template.md`(원고 틀), `bNN_*.py`(코드 블록, 하나씩 실행해 출력을 채움),
   공용 모듈, `fill*.py`(틀의 `<<CODE>>`/`<<OUT>>` 자리를 실제 실행 결과로 채워 `manuscript-vol2/chapters/`에 씀).
 - `vol2/v2app/` — 2권 부록 A~C.
+- `vol3/v3cNN/`, `vol3/v3app/` — 3권 N장과 부록 A~D. 블록 파일이 곧 3권 예제이고, `vol3/fill.py` 하나로 장을 다시 만듭니다. 경로는 저장소 기준이라 그대로 실행됩니다([`examples/vol3/README.md`](../examples/vol3/README.md)).
 
 생성 스크립트 안의 작업 경로(임시 폴더)와 데이터 경로는 원고를 쓸 때의 환경 그대로입니다.
 다시 생성하려면 경로를 이 폴더 기준으로 바꾸고, 데이터·모델 파일(저장소에 넣지 않음)을 다시 받아야 합니다.

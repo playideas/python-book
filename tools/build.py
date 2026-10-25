@@ -24,6 +24,7 @@ import argparse
 VOLUMES = {
     1: ("manuscript", "파이썬_완전_백과사전", 20),
     2: ("manuscript-vol2", "파이썬_완전_백과사전_2권_PyTorch", 21),
+    3: ("manuscript-vol3", "파이썬_완전_백과사전_3권_로봇", 21),
 }
 
 

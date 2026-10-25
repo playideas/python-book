@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!-- 6.10절 실습: 허리(z) + 어깨(y) + 팔꿈치(y) 3관절 팔. 링크 길이는 명령줄에서 바꿀 수 있다 -->
+<robot name="arm3" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="upper" default="0.20"/>                <!-- 위팔 길이(m) -->
+  <xacro:arg name="fore" default="0.18"/>                 <!-- 아래팔 길이(m) -->
+  <xacro:property name="radius" value="0.015"/>
+
+  <xacro:macro name="rod_link" params="name length mass">
+    <link name="${name}">
+      <visual>
+        <origin xyz="0 0 ${length / 2}"/>
+        <geometry><cylinder radius="${radius}" length="${length}"/></geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 ${length / 2}"/>
+        <geometry><cylinder radius="${radius}" length="${length}"/></geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 ${length / 2}"/>
+        <mass value="${mass}"/>
+        <inertia ixx="${mass * (3 * radius**2 + length**2) / 12}" ixy="0" ixz="0"
+                 iyy="${mass * (3 * radius**2 + length**2) / 12}" iyz="0" izz="${mass * radius**2 / 2}"/>
+      </inertial>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="hinge" params="name parent child z axis lower upper">
+    <joint name="${name}" type="revolute">
+      <parent link="${parent}"/>
+      <child link="${child}"/>
+      <origin xyz="0 0 ${z}"/>
+      <axis xyz="${axis}"/>
+      <limit lower="${lower}" upper="${upper}" effort="3" velocity="3"/>
+    </joint>
+  </xacro:macro>
+
+  <xacro:rod_link name="base_link" length="0.05" mass="0.3"/>
+  <xacro:hinge name="pan" parent="base_link" child="shoulder_link" z="0.05" axis="0 0 1"
+               lower="${-pi}" upper="${pi}"/>
+  <xacro:rod_link name="shoulder_link" length="0.05" mass="0.1"/>
+  <xacro:hinge name="lift" parent="shoulder_link" child="upper_arm" z="0.05" axis="0 1 0"
+               lower="${-pi / 2}" upper="${pi / 2}"/>
+  <xacro:rod_link name="upper_arm" length="$(arg upper)" mass="0.15"/>
+  <xacro:hinge name="elbow" parent="upper_arm" child="forearm" z="$(arg upper)" axis="0 1 0"
+               lower="${-2.6}" upper="${2.6}"/>
+  <xacro:rod_link name="forearm" length="$(arg fore)" mass="0.1"/>
+
+  <joint name="tip_joint" type="fixed">
+    <parent link="forearm"/>
+    <child link="tip"/>
+    <origin xyz="0 0 $(arg fore)"/>
+  </joint>
+  <link name="tip"/>
+</robot>

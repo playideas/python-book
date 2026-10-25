@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!-- 3장의 예제 6자유도 팔을 xacro로: 마디 하나를 매크로로 만들고 여섯 번 부른다 -->
+<robot name="arm6" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="tool_length" default="0.05"/>          <!-- 명령줄에서 바꿀 수 있는 값 -->
+  <xacro:property name="radius" value="0.02"/>            <!-- 링크 막대 반지름(m) -->
+  <xacro:property name="density" value="2.0"/>            <!-- 링크 1m당 질량(kg/m) -->
+
+  <!-- z축 방향으로 length만큼 뻗은 막대 링크 -->
+  <xacro:macro name="rod_link" params="name length">
+    <xacro:property name="m" value="${density * length}"/>
+    <link name="${name}">
+      <visual>
+        <origin xyz="0 0 ${length / 2}"/>
+        <geometry><cylinder radius="${radius}" length="${length}"/></geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 ${length / 2}"/>
+        <geometry><cylinder radius="${radius}" length="${length}"/></geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 ${length / 2}"/>
+        <mass value="${m}"/>
+        <inertia ixx="${m * (3 * radius**2 + length**2) / 12}" ixy="0" ixz="0"
+                 iyy="${m * (3 * radius**2 + length**2) / 12}" iyz="0" izz="${m * radius**2 / 2}"/>
+      </inertial>
+    </link>
+  </xacro:macro>
+
+  <!-- 마디 하나 = 회전 관절 joint{i} + 그 뒤의 링크 link{i} -->
+  <xacro:macro name="segment" params="i parent offset axis length">
+    <joint name="joint${i}" type="revolute">
+      <parent link="${parent}"/>
+      <child link="link${i}"/>
+      <origin xyz="0 0 ${offset}" rpy="0 0 0"/>
+      <axis xyz="${axis}"/>
+      <limit lower="${-pi}" upper="${pi}" effort="10" velocity="2"/>
+    </joint>
+    <xacro:rod_link name="link${i}" length="${length}"/>
+  </xacro:macro>
+
+  <xacro:rod_link name="base_link" length="0.10"/>
+  <xacro:segment i="1" parent="base_link" offset="0.10" axis="0 0 1" length="0.10"/>
+  <xacro:segment i="2" parent="link1" offset="0.10" axis="0 1 0" length="0.30"/>
+  <xacro:segment i="3" parent="link2" offset="0.30" axis="0 1 0" length="0.25"/>
+  <xacro:segment i="4" parent="link3" offset="0.25" axis="0 0 1" length="0.05"/>
+  <xacro:segment i="5" parent="link4" offset="0.05" axis="0 1 0" length="0.05"/>
+  <xacro:segment i="6" parent="link5" offset="0.05" axis="0 0 1" length="$(arg tool_length)"/>
+
+  <joint name="tip_joint" type="fixed">
+    <parent link="link6"/>
+    <child link="tip"/>
+    <origin xyz="0 0 $(arg tool_length)"/>
+  </joint>
+  <link name="tip"/>
+</robot>

@@ -1,0 +1,18 @@
+[project]
+name = "python-book-vol3-examples"
+version = "0.1.0"
+description = "파이썬 완전 백과사전 3권(로봇 편) 예제"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "anthropic==2.3.0",
+    "gymnasium[mujoco]==1.4.0",
+    "matplotlib==3.11.2",
+    "mujoco==3.17.0",
+    "numpy==2.5.4",
+    "opencv-python-headless==5.0.0.93",
+    "pyserial==3.5",
+    "scipy==1.18.1",
+    "torch==2.14.1",
+    "torchvision==0.29.1",
+    "transformers==5.20.2",
+]

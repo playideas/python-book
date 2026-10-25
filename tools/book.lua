@@ -22,7 +22,13 @@ local RARE_CJK = { [0x5F28] = true, [0x768B] = true }
 local function fallback_font(cp)
   if cp >= 0x0E00 and cp <= 0x0E7F then
     return "\\thaifont"
-  elseif (cp >= 0x2580 and cp <= 0x259F) or cp == 0xFFFD or cp == 0x207B then
+  elseif (cp >= 0x2580 and cp <= 0x259F) or cp == 0xFFFD or cp == 0x207B or cp == 0x2213 then
+    return "\\symfallback"
+  elseif cp >= 0x1D00 and cp <= 0x1DBF then
+    -- 위첨자 글자(Jᵀ의 ᵀ): 고운바탕에도 Arial Unicode MS에도 없다
+    return "\\supfallback"
+  elseif (cp >= 0x0370 and cp <= 0x03FF) or (cp >= 0x0300 and cp <= 0x036F) then
+    -- 그리스 문자(θ, ω), 결합 부호(q̇의 점): 고운바탕에 없다
     return "\\symfallback"
   elseif (cp >= 0x0590 and cp <= 0x06FF) or (cp >= 0xFB1D and cp <= 0xFDFF) or (cp >= 0xFE70 and cp <= 0xFEFF)
       or (cp >= 0x1E00 and cp <= 0x1EFF) or RARE_CJK[cp] then

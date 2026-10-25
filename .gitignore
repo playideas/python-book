@@ -30,3 +30,11 @@ output/*.pdf
 output/*.epub
 output/*.docx
 output/.book-fonts.tex
+
+# 3권 블록 실행 부산물
+MUJOCO_LOG.TXT
+manuscript-vol3/assets/images/**/*.csv
+manuscript-vol3/assets/images/**/*.npy
+manuscript-vol3/assets/images/**/*.npz
+manuscript-vol3/assets/images/**/*.pt
+manuscript-vol3/assets/images/**/*.pkl
