@@ -10,6 +10,8 @@
 | 3권 | 로봇 (21장, 부록 A~D) | [`manuscript-vol3/`](manuscript-vol3/) | [`examples/vol3/`](examples/vol3/) |
 | 4권 | 에이전트 엔지니어링 | 계획 중 | |
 
+책과 함께 볼 수 있는 **딥러닝 노트북 11강**도 있습니다. 텐서에서 시작해 CNN, 생성 모델, Transformer를 거쳐 LLM까지, 혼자 따라 하며 돌려 보는 Colab용 실습입니다. [`notebooks/`](notebooks/)를 보세요.
+
 ## 읽기
 
 PDF로 받아 읽을 수 있습니다.
@@ -49,6 +51,7 @@ uv run python tools/build.py --pdf --vol 3   # output/에 3권 PDF
 - `manuscript/`, `manuscript-vol2/`, `manuscript-vol3/` — 원고(장, 부록, 그림)
 - `examples/` — 원고에서 뽑은 실행용 예제
 - `tools/` — PDF 빌드(`build.py`), 예제 추출(`extract_examples.py`), 예제 검사(`check_examples.py`)
+- `notebooks/` — 딥러닝 노트북 11강(Colab 기준). 라이선스와 제3자 고지는 폴더 안에 따로 있습니다
 - `build-src/` — 2·3권 원고를 만든 작업 재료. 코드 블록을 실행해 출력을 원고에 채우는 스크립트입니다([`build-src/README.md`](build-src/README.md)).
 
 ## 라이선스
@@ -57,5 +60,6 @@ uv run python tools/build.py --pdf --vol 3   # output/에 3권 PDF
   출처를 밝히면 자유롭게 읽고 공유하고 고쳐 쓸 수 있습니다. 영리 목적으로는 쓸 수 없고, 고친 결과물도 같은 라이선스로 공개해야 합니다.
 - **코드**(`examples/`, `tools/`, `build-src/`의 코드, 원고 속 코드 블록): [MIT](LICENSE)
   업무용이든 개인용이든 마음대로 복사해 쓰세요.
+- **딥러닝 노트북**(`notebooks/`): 책과 조건이 다릅니다. 본문은 [CC BY 4.0](notebooks/LICENSE-text), 코드는 [MIT](notebooks/LICENSE)이고, 가져온 코드·데이터·모델·그림은 [notebooks/NOTICE.md](notebooks/NOTICE.md)의 조건을 따릅니다.
 - **글꼴**: `tools/fonts/`의 글꼴은 각자의 [SIL Open Font License](tools/fonts/)를 따릅니다.
 - **데이터**: 예제가 내려받는 데이터셋과 모델은 각 제공처의 라이선스를 따릅니다. 출처와 라이선스는 그 데이터를 처음 쓰는 장에 적어 두었습니다.
